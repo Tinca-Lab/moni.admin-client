@@ -13,6 +13,9 @@
         @onCancel="onCancel"
         @onLoadPictures="onLoadPictures"
       />
+      <div>
+
+      </div>
     </div>
     <!-- Modal for cancel -->
     <app-modal

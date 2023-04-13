@@ -78,6 +78,7 @@ export default {
           categoryId: this.product.categoryId || null,
           subcategoryId: this.product.subcategoryId || null,
         };
+        console.log(product);
         await this.$axios.post("/api/v1/products", product);
         this.$notify({
           title: "Exito",

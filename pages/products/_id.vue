@@ -4,7 +4,7 @@
     <div class="w-full h-min">
       <app-nav class="mb-5" label-button="Editar producto" @onEdit="onEdit" />
       <p v-if="product?.reference">
-        REF: <span class="italic">{{ product.reference }}</span>
+        REF: <span class="italic"> {{ product.reference }}</span>
       </p>
       <app-product-form
         v-if="!isLoading && product"
