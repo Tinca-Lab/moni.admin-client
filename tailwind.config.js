@@ -9,9 +9,14 @@ module.exports = {
     "./node_modules/flowbite/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        'supersm': '315px',
+        // => @media (min-width: 640px) { ... }
+    },
   },
   plugins: [
     require('flowbite')
   ],
+}
 }
