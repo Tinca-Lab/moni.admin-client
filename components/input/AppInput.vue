@@ -7,6 +7,7 @@
     :disabled="disabled"
     :autofocus="autofocus"
     :maxlength="length"
+    :value="value"
     class="bg-white border-[3px] border-gray-500 outline-none p-1.5 text-lg focus:border-black disabled:text-neutral-500 disabled:border-gray-300 ease-in-out duration-200 checked:bg-black"
     @input="$emit('input', $event.target.value)"
   />
@@ -45,9 +46,14 @@ export default {
       default: false,
     },
     length: {
-      type: Number,
-      default: 100,}
-  },
+      type: String,
+      default: '100',
+    },
+    value: {
+      type: String,
+      default: '100',
+    },
+  }
 };
 </script>
 

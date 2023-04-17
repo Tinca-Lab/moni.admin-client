@@ -71,6 +71,8 @@ export default {
     },
     onLoadPictures(image) {
       this.images.push(image);
+      console.log(this.images);
+      console.log(image);
     },
     async onSubmit() {
       try {
