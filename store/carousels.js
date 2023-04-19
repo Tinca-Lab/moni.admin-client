@@ -16,7 +16,7 @@ export const actions = {
   async fetchCarousels({ commit }) {
     try {
       const { carousels, ...metadata } = await this.$axios.$get(
-        "api/v1/carousels"
+        "api/v1/carousel"
       );
       commit("setCarousels", carousels);
       commit("setMetadata", metadata);

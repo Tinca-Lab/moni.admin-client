@@ -10,7 +10,7 @@
         <span class="text-white uppercase">Crear carrusel</span>
       </nuxt-link>
     </nav>
-    <template v-if="!carousels[0] && isLoading === false">
+    <template v-if="!carousels && isLoading === false">
       <app-not-found />
     </template>
     <template v-else-if="isLoading">
@@ -19,9 +19,9 @@
     <app-data-table
       v-else
       v-model="currentPage"
-      :prefix="'products'"
+      :prefix="'carousel'"
       :headers="headers"
-      :data="carousels"
+      :data="metadata"
       :metadata="metadata"
       @onPageChange="onPageChange"
     />
@@ -49,10 +49,6 @@ export default {
         value: "image"
       },
       {
-        text: "Call to action",
-        value: "name"
-      },
-      {
         text: "Fecha de creación",
         value: "createdAt"
       },
@@ -68,15 +64,17 @@ export default {
   }),
   computed: {
     carousels() {
-      return this.$store.state.carousels.data;
+      return this.$store.state.carousels.metadata;
     },
     metadata() {
       return this.$store.state.carousels.metadata;
     }
   },
   async mounted() {
+
     await this.$store.dispatch("carousels/fetchCarousels");
     this.isLoading = false;
+
   },
   methods: {
     onFormatDate(date) {

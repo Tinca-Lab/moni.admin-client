@@ -2,20 +2,19 @@
   <div class="h-full w-full p-5 xl:px-20 xl:py-10 overflow-x-hidden">
     <app-title title="Carruseles" />
     <app-label label="Crear carrusel" />
-    <nav class="flex w-full">
-      <app-back @onBackTo="$router.go(-1)" />
+    <nav class="flex w-full" @click="onCancel">
+      <app-back />
     </nav>
     <div class="w-full">
       <app-carousel-form
-        v-model="carousel"
+      v-model="carousel"
+      :dataImages = "dataImages"
         :is-mutating="true"
         @onSubmit="onSubmit"
         @onCancel="onCancel"
+        @update-dataImage="onUpdateDataImage"
         @onLoadPictures="onLoadPictures"
       />
-      <div>
-
-      </div>
     </div>
     <!-- Modal for cancel -->
     <app-modal
@@ -27,6 +26,7 @@
       @onCancel="onClose"
       @onSubmit="$router.go(-1)"
     />
+
   </div>
 </template>
 
@@ -45,6 +45,7 @@ export default {
     carousel: {},
     isCancel: false,
     images: [],
+    dataImages: [],
   }),
   head() {
     return {
@@ -62,6 +63,11 @@ export default {
     onClose() {
       this.isCancel = false;
     },
+      // Método para obtener los datos de dataImage y asignarlos a la propiedad dataImages en el componente padre
+    onUpdateDataImage(newDataImage) {
+      // Actualizar la variable dataImages en el componente padre con el nuevo valor
+      this.dataImages = newDataImage;
+    },
     onCancel() {
       if (Object.keys(this.carousel).length > 0) {
         this.isCancel = true;
@@ -71,22 +77,22 @@ export default {
     },
     onLoadPictures(image) {
       this.images.push(image);
-      console.log(this.images);
-      console.log(image);
     },
     async onSubmit() {
       try {
-        await this.$axios.post(
-          `/api/v1/s3/banner/${this.carousel.tag}`,{
-            images: this.images
-          }
+        // console.log(this.dataImages);
+        // console.log(this.carousel);
+        const hola = await this.$axios.post(
+          `/api/v1/carousel/`, this.dataImages
         );
+        console.log(hola);
         this.$notify({
           title: "¡Exito!",
           text: "Hemos guardado el carrusel",
           type: "success",
         });
       } catch (e) {
+        // console.log(e.response.data.message);
         this.$notify({
           title: "¡Algo salió mal!",
           message: e.response.data.message,
