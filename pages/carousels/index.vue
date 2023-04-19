@@ -19,7 +19,7 @@
     <app-data-table
       v-else
       v-model="currentPage"
-      :prefix="'carousel'"
+      :prefix="'carousels'"
       :headers="headers"
       :data="metadata"
       :metadata="metadata"

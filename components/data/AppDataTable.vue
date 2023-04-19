@@ -154,11 +154,11 @@
                 {{ formatCurrency(item?.price) }}
               </th>
               <th
-                v-if="item?.quantity"
+                v-if="item?.images && prefix == 'carousels'"
                 scope="row"
                 class="p-2 font-medium text-neutral-900"
               >
-                {{ item?.quantity }}
+                {{ item.images[0].url }}
               </th>
               <th
                 v-if="item?.createdAt"
